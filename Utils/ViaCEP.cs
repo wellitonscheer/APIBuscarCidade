@@ -3,28 +3,30 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.Json;
 using System.Threading.Tasks;
-using ChamarCepApi.Models;
+using APIBuscarCidade.Models;
 
-namespace ChamarCepApi.Controllers
+namespace APIBuscarCidade.Utils
 {
-    public class CEP
+    public class ViaCEP
     {
-        public string BuscarCidade(Cidade cidade)
+        public Cidade BuscarCidade(Cidade cidade)
         {
-            string strurlTest = string.Format("https://viacep.com.br/ws/{0}/json/", cidade.Cep);
-            WebRequest requestObjGet = WebRequest.Create(strurlTest);
+            string url = string.Format("https://viacep.com.br/ws/{0}/json/", cidade.cep);
+            WebRequest requestObjGet = WebRequest.Create(url);
             requestObjGet.Method = "GET";
             HttpWebResponse responseObjGet = null;
             responseObjGet = (HttpWebResponse)requestObjGet.GetResponse();
-            string streesulttest = null;
+            string jsonRetorno = null;
             using (Stream stream = responseObjGet.GetResponseStream())
             {
                 StreamReader sr = new StreamReader(stream);
-                streesulttest = sr.ReadToEnd();
+                jsonRetorno = sr.ReadToEnd();
                 sr.Close();
             }
-            return streesulttest;
+            Cidade cidadeRetorno = JsonSerializer.Deserialize<Cidade>(jsonRetorno);
+            return cidadeRetorno;
         }
     }
 }

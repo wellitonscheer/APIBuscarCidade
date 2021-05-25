@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "ChamarCepApi": {
+    "APIBuscarCidade": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ChamarCepApi.Models
+namespace APIBuscarCidade.Models
 {
     public class Cidade
     {
-        [Required]
-        public string Cep { get; set; }
+        public string cep { get; set; }
+        public string localidade { get; set; }
     }
 }
